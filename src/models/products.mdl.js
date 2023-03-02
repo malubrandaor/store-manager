@@ -5,7 +5,10 @@ const allProducts = async () => {
     return result;
 };
 const productsById = async (id) => {
-    const [[result]] = await connections.execute('SELECT * FROM StoreManager.products WHERE id =?;', [id]);
+    const [[result]] = await connections.execute(
+        'SELECT * FROM StoreManager.products WHERE id =?;',
+         [id],
+        );
     return result;
 };
 
