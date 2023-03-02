@@ -1,13 +1,13 @@
 const productsM = require('../models/products.mdl');
 
-const allProductsS = async () => {
-    const allStock = await productsM.allProductsS();
+const allProducts = async () => {
+    const allStock = await productsM.allProducts();
     return allStock;
 };
 
-const productsByIdS = async (id) => {
-    const productId = await productsM.productsByIdS(id);
+const productsById = async (id) => {
+    const productId = await productsM.productsById(id);
     return productId;
 };
 
-module.exports = { allProductsS, productsByIdS };
+module.exports = { allProducts, productsById };
