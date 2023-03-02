@@ -9,5 +9,10 @@ const productsById = async (id) => {
     const productId = await productsM.productsById(id);
     return productId;
 };
-
-module.exports = { allProducts, productsById };
+const addProduct = async (name) => {
+    const addedNewProduct = await productsM.allProducts();
+    const id = addedNewProduct.length + 1;
+    productsM.addProduct(name);
+    return { name: name.name, id };
+};
+module.exports = { allProducts, productsById, addProduct };
