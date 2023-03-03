@@ -10,6 +10,8 @@ const salesService = require('../../../src/services/sales.srvc');
 const { salesMock, oneSale } = require("../../mocks.sales");
 
 describe('Testa a camada controller para a função "allSales"', function () {
+  afterEach(sinon.restore);
+  
   it("Busca por todas os produtos cadastrados", async function () {
     const req = {};
     const res = {};
