@@ -20,4 +20,14 @@ const addProduct = async (req, res) => {
     res.status(201).json(addedProduct);
 };
 
-module.exports = { allProducts, productsById, addProduct };
+const productUpdate = async (req, res) => {
+    const { name } = req.body;
+    const { id } = req.params;
+    const newId = await productS.productUpdate(id, name);
+    if (!newId) {
+        return res.status(404).json({ message: 'Product not found' });
+    }
+    res.status(200).json(newId);
+};
+
+module.exports = { allProducts, productsById, addProduct, productUpdate };

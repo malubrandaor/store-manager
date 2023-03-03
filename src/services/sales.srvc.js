@@ -8,5 +8,4 @@ const salesById = async (id) => {
     const salesId = await salesM.salesById(id);
     return salesId;
 };
-
 module.exports = { allSales, salesById };
