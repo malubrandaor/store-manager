@@ -8,27 +8,7 @@ chai.use(sinonChai);
 const productController = require('../../../src/controllers/products.cntrll');
 const productService = require('../../../src/services/products.srvc');
 const { productsMock, oneProduct } = require("../../mocks.product");
-// const productModel = require('../../../src/models/products.mdl');
-// const { productMock,
-//     productsListMock,
-//     idProductMock,
-//     newProductMock,
-//     changeProductMock,
-//      } = require('../../mock/productMock');
 
-  //   describe('Teste productController', function () {
-  //       it('Teste getAll', async function () {
-  //         const req = {};
-  //         const res = {};
-  //         res.status = sinon.stub().returns(res);
-  //         res.json = sinon.stub().returns();
-  //         sinon.stub(productService, 'allProducts').resolves(productsListMock);
-  //         await productController.allProducts(req, res);
-  //         expect(res.status).to.have.been.calledWith(200);
-  //         expect(res.json).to.have.been.calledWith(productsListMock);
-  //       });
-  //       afterEach(sinon.restore)
-  // });
   describe('Testa a camada controller para a rota "/products', function () {
     afterEach(function () {
       sinon.restore();
