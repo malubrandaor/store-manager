@@ -47,18 +47,18 @@ const { productsMock, oneProduct } = require("../../mocks.product");
   
         sinon.stub(productService, "productsById").resolves({
           type: null,
-          message: oneProduct,
+          message: productsMock,
         });
         await productController.productsById(req, res);
   
         expect(res.status).to.have.been.calledWith(200);
-        expect(res.status().json).to.have.been.calledWith(oneProduct);
+        expect(res.status().json).to.have.been.calledWith(productsMock);
       });
   
       it("Busca por um produto pelo ID invalido", async function () {
         const req = {
           params: {
-            id: "1500",
+            id: "1000",
           },
         };
         const res = {};
@@ -97,7 +97,7 @@ const { productsMock, oneProduct } = require("../../mocks.product");
       });
   
       it("Testa fazer o update de um produto de id inexistente", async function () {
-        const req = { params: { id: 77 } };
+        const req = { params: { id: 89 } };
         const res = {};
   
         res.status = sinon.stub().returns(res);

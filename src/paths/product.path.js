@@ -8,5 +8,5 @@ routes.get('/', productController.allProducts);
 routes.get('/:id', productController.productsById);
 routes.post('/', nameValidation, minimumLength, productController.addProduct);
 routes.put('/:id', nameValidation, minimumLength, productController.productUpdate);
-
+routes.delete('/:id', productController.deleteProduct);
 module.exports = routes;
