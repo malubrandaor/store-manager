@@ -5,26 +5,37 @@ const { expect } = require('chai');
 
 const connections = require('../../../src/models/connection');
 const productModel = require('../../../src/models/products.mdl');
-const { productMock, idProductMock, changeProductMock, } = require('../../mock/productMock');
+const { productsMock, oneProduct } = require('../../mocks.product');
 
 describe("Testa Product Model", function () {
-   
+
+  it('Teste allProducts', async function ()  {
+      sinon.stub(connections, 'execute').resolves([productsMock]);
+      const getIdProduct = await productModel.allProducts();
+      expect(getIdProduct).to.be.deep.equal(productsMock);
+    }); 
     it('Teste productsbyid', async function ()  {
-      sinon.stub(connections, 'execute').resolves(productMock);
+      sinon.stub(connections, 'execute').resolves([[productsMock]]);
       const getIdProduct = await productModel.productsById(1);
-      expect(getIdProduct).to.be.deep.equal(idProductMock);
+      expect(getIdProduct).to.be.deep.equal(productModel);
+    });
+    it("should return a message when the product is not found", async function () {
+      sinon.stub(connections, "execute").resolves([[]]);
+  
+      const response = await productModel.productsById(1);
+      expect(response).to.be.deep.equal(undefined);
     });
   
     it('Teste addprduct', async function () {
-      sinon.stub(connections, 'execute').resolves([{ newId: 1 }]);
-      const insertProducts = await productModel.addProduct("ProdutoX");
-      expect(insertProducts).to.be.deep.equal(1);
+      sinon.stub(connections, 'execute').resolves({ newId: 1 });
+      const insertProducts = await productModel.addProduct(productsMock.name);
+      expect(insertProducts).to.be.deep.equal({ newId: 1 });
     });
   
     it('Teste updateproduct', async function () {
-      sinon.stub(connections, 'execute').resolves([[changeProductMock]])
+      sinon.stub(connections, 'execute').resolves([oneProduct])
       const result = await productModel.productUpdate(1, "Martelo do Batman");
-      expect(result).to.be.deep.equal(changeProductMock);
+      expect(result).to.be.deep.equal(oneProduct);
     });
   
   

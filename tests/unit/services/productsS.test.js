@@ -1,30 +1,44 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { productMock, productListMock, idProductMock, newProductMock, changeProductMock, deleteProductMock } = require('../../mock/productMock');
+const { productsMock, oneProduct } = require('../../mocks.product');
 const productModel = require('../../../src/models/products.mdl');
 const productService = require('../../../src/services/products.srvc');
 
 describe("Testa productService", function () {
 
-  it('test productbyid', async function() {
-    sinon.stub(productModel, 'idProduct').resolves(idProductMock);
-    const response = await productService.productsById(1);
-    expect(response).to.be.deep.equal(idProductMock);
+  it('should return a list of products', async function() {
+    sinon.stub(connection, 'execute').resolves([productsMock]);
+
+    const response = await productServices.allProducts();
+    expect(response).to.be.deep.equal(productsMock);
+  });
+
+  it('should return a product by id', async function () {
+    sinon.stub(connection, 'execute').resolves([productsMock]);
+
+    const response = await productServices.productsById(1);
+    expect(response).to.be.deep.equal(productsMock);
+  });
+  it('should return a message when the product is not found', async function () {
+    sinon.stub(connection, 'execute').resolves([[]]);
+
+    const response = await productServices.productsById(1);
+    expect(response).to.be.deep.equal({ status: 404, message: 'Product not found' });
   });
 
   it('Teste addProduct', async function() {
-    sinon.stub(productModel, 'newProduct').resolves(1);
+    sinon.stub(productModel, 'addProduct').resolves(1);
     const response = await productService.addProduct({ name: "ProdutoX" });
-    expect(response).to.be.deep.equal(newProductMock.product)
+    expect(response).to.be.deep.equal(productsMock)
   });
   it('Teste productupdate', async function () {
     const update = { id: 1, name: "Martelo do Batman" };
-    sinon.stub(productModel, 'idProduct').resolves(update);
-    sinon.stub(productModel, 'changeProduct').resolves({ id: 1, name: "Martelo do Batman" });
+    sinon.stub(productModel, 'productsById').resolves(update);
+    sinon.stub(productModel, 'productUpdate').resolves({ id: 1, name: "Martelo do Batman" });
     const response = await productService.productUpdate(1, "Martelo do Batman");
     expect(response).to.be.deep.equal(update);
   });
 
-  afterEach(sinon.restore)
+  afterEach(sinon.restore);
 
 });
