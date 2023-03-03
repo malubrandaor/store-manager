@@ -27,9 +27,9 @@ const productUpdate = async (id, name) => {
     return retorno; 
 };
 const deleteProduct = async (id) => {
-   const [deletedId] = await connections.execute (
-        'DELETE FROM StoreManager.products WHERE id = ?;',
-        [id],
+   const [deletedId] = await connections.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?;',
+    [id],
     );
     return deletedId;
 };

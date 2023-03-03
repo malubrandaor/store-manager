@@ -35,6 +35,6 @@ const deleteProduct = async (req, res) => {
     const { type, message } = await productS.deleteProduct(id);
     if (type) return res.status(404).json({ message });
     return res.status(204).end();
-}
+};
 
 module.exports = { allProducts, productsById, addProduct, productUpdate, deleteProduct };
