@@ -15,9 +15,9 @@ describe("Testa Product Model", function () {
       expect(getIdProduct).to.be.deep.equal(productsMock);
     }); 
     it('Teste productsbyid', async function ()  {
-      sinon.stub(connections, 'execute').resolves([[productsMock]]);
+      sinon.stub(connections, 'execute').resolves([productsMock]);
       const getIdProduct = await productModel.productsById(1);
-      expect(getIdProduct).to.be.deep.equal(productModel);
+      expect(getIdProduct).to.be.deep.equal(productsMock);
     });
     it("should return a message when the product is not found", async function () {
       sinon.stub(connections, "execute").resolves([[]]);

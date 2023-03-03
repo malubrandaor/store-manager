@@ -14,7 +14,7 @@ const { productsMock, oneProduct } = require("../../mocks.product");
       sinon.restore();
     });
   
-    describe('Testa a camada controller para a função "getAllProducts"', function () {
+    describe('Testa a camada controller para a função "allProducts"', function () {
       it("Busca por todas os produtos cadastrados", async function () {
         const req = {};
         const res = {};
