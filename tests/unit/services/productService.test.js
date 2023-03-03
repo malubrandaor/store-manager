@@ -12,7 +12,7 @@ describe("Testa productService", function () {
     // sinon.stub(connection, 'execute').resolves([productsMock]);
     const response = { type: null, message: productsMock };
     sinon.stub(productModel, 'allProducts').resolves(productsMock);
-    const products = await productServices.allProducts();
+    const products = await productService.allProducts();
     expect(products).to.be.deep.equal(response);
   });
 
@@ -20,7 +20,7 @@ describe("Testa productService", function () {
     // sinon.stub(connection, 'execute').resolves([productsMock]);
     const response = { type: null, message: oneProduct };
     sinon.stub(productModel, 'productsById').resolves(oneProduct);
-    const products = await productServices.productsById(1);
+    const products = await productService.productsById(1);
     expect(products).to.be.deep.equal(response);
     // const response = await productServices.productsById(1);
     // expect(response).to.be.deep.equal(productsMock);
