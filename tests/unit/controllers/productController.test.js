@@ -7,10 +7,10 @@ chai.use(sinonChai);
 
 const productController = require('../../../src/controllers/products.cntrll');
 const productService = require('../../../src/services/products.srvc');
-const { productsMock, oneProduct } = require("../../mocks.product");
+const { productsMock, oneProduct } = require('../../mocks.product');
 
   describe('Testa a camada controller para a rota "/products', function () {
-    beforeEach(sinon.restore);
+    afterEach(sinon.restore);
   
       it("Busca por todas os produtos cadastrados", async function () {
         const req = {};
@@ -21,7 +21,7 @@ const { productsMock, oneProduct } = require("../../mocks.product");
   
         sinon
           .stub(productService, "allProducts")
-          .resolves({ type: null, message: productsMock });
+          .resolves(productsMock);
   
         await productController.allProducts(req, res);
   
@@ -40,10 +40,7 @@ const { productsMock, oneProduct } = require("../../mocks.product");
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns();
   
-        sinon.stub(productService, "productsById").resolves({
-          type: null,
-          message: oneProduct,
-        });
+        sinon.stub(productService, "productsById").resolves(oneProduct);
         await productController.productsById(req, res);
   
         expect(res.status).to.have.been.calledWith(200);
@@ -63,7 +60,7 @@ const { productsMock, oneProduct } = require("../../mocks.product");
   
         sinon
           .stub(productService, "productsById")
-          .resolves({ type: true });
+          .resolves(!oneProduct);
         await productController.productsById(req, res);
   
         expect(res.status).to.have.been.calledWith(404);

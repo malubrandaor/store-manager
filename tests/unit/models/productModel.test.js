@@ -13,12 +13,12 @@ describe("Testa Product Model", function () {
   it('Teste allProducts', async function ()  {
       sinon.stub(connections, 'execute').resolves([productsMock]);
       const getIdProduct = await productModel.allProducts();
-      expect(getIdProduct).to.be.deep.equal(productsMock[0]);
+      expect(getIdProduct).to.be.deep.equal(productsMock);
     }); 
     it('Teste productsbyid', async function ()  {
-      sinon.stub(connections, 'execute').resolves([oneProduct]);
+      sinon.stub(connections, 'execute').resolves([[oneProduct]]);
       const getIdProduct = await productModel.productsById(1);
-      expect(getIdProduct).to.be.deep.equal(oneProduct[0][1]);
+      expect(getIdProduct).to.be.deep.equal(oneProduct);
     });
     // it("should return a message when the product is not found", async function () {
     //   sinon.stub(connections, "execute").resolves([[]]);

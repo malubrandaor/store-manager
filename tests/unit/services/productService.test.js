@@ -1,27 +1,24 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-// const connection = require('../../../src/models/connection');
+const connection = require('../../../src/models/connection');
 const { productsMock, oneProduct } = require('../../mocks.product');
 const productModel = require('../../../src/models/products.mdl');
 const productService = require('../../../src/services/products.srvc');
 
 describe("Testa productService", function () {
+  afterEach(sinon.restore);
 
   it('should return a list of products', async function() {
-    // sinon.stub(connection, 'execute').resolves([productsMock]);
-    const response = { type: null, message: productsMock };
-    sinon.stub(productModel, 'allProducts').resolves(productsMock);
+    sinon.stub(connection, 'execute').resolves([productsMock]);
     const products = await productService.allProducts();
-    expect(products).to.be.deep.equal(response);
+    expect(products).to.be.deep.equal(productsMock);
   });
 
   it('should return a product by id', async function () {
-    // sinon.stub(connection, 'execute').resolves([productsMock]);
-    const response = { type: null, message: oneProduct };
-    sinon.stub(productModel, 'productsById').resolves(oneProduct);
+    sinon.stub(connection, 'execute').resolves([[oneProduct]]);
     const products = await productService.productsById(1);
-    expect(products).to.be.deep.equal(response);
+    expect(products).to.be.deep.equal(oneProduct);
     // const response = await productServices.productsById(1);
     // expect(response).to.be.deep.equal(productsMock);
   });
