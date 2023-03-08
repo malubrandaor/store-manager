@@ -22,12 +22,12 @@ describe("Testa productService", function () {
     // const response = await productServices.productsById(1);
     // expect(response).to.be.deep.equal(productsMock);
   });
-  // it('should return a message when the product is not found', async function () {
-  //   sinon.stub(connection, 'execute').resolves([[]]);
+  it('should return a message when the product is not found', async function () {
+    sinon.stub(connection, 'execute').resolves([[]]);
 
-  //   const response = await productServices.productsById(1);
-  //   expect(response).to.be.deep.equal({ status: 404, message: 'Product not found' });
-  // });
+    const response = await productService.productsById(1);
+    expect(response).to.be.deep.equal({ message: 'Product not found' });
+  });
 
   // it('Teste addProduct', async function() {
   //   sinon.stub(productModel, 'addProduct').resolves(1);
